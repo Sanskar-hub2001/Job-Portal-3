@@ -17,14 +17,31 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-const corsOptions = {
-    origin:`${BASE_URL}`,
-    // origin:'https://careerhorizon123.netlify.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials:true
-}
+// const corsOptions = {
+//     origin:`${BASE_URL}`,
+//     // origin:'https://careerhorizon123.netlify.app',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     credentials:true
+// }
+// app.use(cors({ origin: '*' }));
+// app.use(cors(corsOptions));
 
-app.use(cors(corsOptions));
+const allowedOrigins = [
+    `${BASE_URL}`
+];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+};
+
 
 const PORT = process.env.PORT || 3000;
 
