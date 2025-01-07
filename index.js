@@ -41,6 +41,8 @@ const corsOptions = {
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 };
+app.use(cors(corsOptions));
+
 
 
 const PORT = process.env.PORT || 3000;
