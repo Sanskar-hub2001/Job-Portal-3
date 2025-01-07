@@ -20,6 +20,7 @@ app.use(cookieParser());
 const corsOptions = {
     origin:`${BASE_URL}`,
     // origin:'https://careerhorizon123.netlify.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials:true
 }
 
